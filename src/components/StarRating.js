@@ -3,12 +3,11 @@ import Star from './Star';
 
 class StarRating extends Component {
 
-  // Initialize a 'rating' state
   state = {
     rating: 0
   }
 
-  // Write a function that returns 5 Star components
+  // Returns 5 Star components
   returnStars = () => {
     let starArray = [];
     for (let i = 0; i < 5; i++) {
@@ -16,20 +15,19 @@ class StarRating extends Component {
         <Star 
           key={i}
           setRating={ () => this.handleChangeRating(i+1) }  
+          isSelected={this.state.rating > i}
           />
       );
     }
     return starArray;
   }
 
-  // Write an event handler that updates the rating state.
-  // Pass the function to a Star component via props
-
   handleChangeRating = (rating) => {
-    this.setState({
-      rating: rating
-    });
-    console.log(rating);
+    if (this.state.rating === rating) {
+      this.setState({rating: 0});
+    } else {
+      this.setState({rating: rating});
+    }
   }
 
   render() {
